@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     name: linting
     steps:
+    - name: Check out repo
+      uses: actions/checkout@main
     - name: Install Flake8
       run: |
         pip install flake8
@@ -22,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     name: unit testing
     steps:
+    - name: Check out repo
+      uses: actions/checkout@main
     - name: install pytest
       run: |
         pip install pytest
