@@ -1,7 +1,7 @@
 name: Manually trigger an Azure Machine Learning job
 
 on:
-  workflow_dispatch:
+  pull_request:
 
 env:
   workspace-name: mlw-dp100-lb152eb03e5604ef2af # name of the Azure Machine Learning workspace
