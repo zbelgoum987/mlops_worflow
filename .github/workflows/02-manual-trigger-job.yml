@@ -9,7 +9,7 @@ env:
 
 jobs:
   linting:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     name: linting
     steps:
     - name: Install Flake8
@@ -19,12 +19,13 @@ jobs:
       run: | 
         flake8 src/model/
   unit_testing:
+    runs-on: ubuntu-latest
     name: unit testing
     steps:
     - name: install pytest
       run: |
         pip install pytest
-    - name: Run unit tests
+    - name:Run unit tests
       run: | 
         pytest tests/test_train.py
   train:
