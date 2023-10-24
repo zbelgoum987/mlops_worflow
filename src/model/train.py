@@ -2,12 +2,10 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
-import os
 import argparse
 import glob
 
 def read_data(path):
-    #df = pd.read_csv(path)
     csv_files = glob.glob(f"{path}/*.csv") 
     if not csv_files: 
         raise RuntimeError(f"No CSV files found in provided data path: {path}") 
@@ -23,6 +21,7 @@ def preprocess_data(df):
     X_test = scaler.transform(X_test)
     return X_train, X_test, y_train, y_test
 
+
 def train_and_test_model(X_train, X_test, y_train, y_test, reg_rate):
     model = LogisticRegression(C=1/reg_rate, random_state=0).fit(X_train, y_train)
     train_acc = model.score(X_train, y_train)
@@ -30,12 +29,14 @@ def train_and_test_model(X_train, X_test, y_train, y_test, reg_rate):
     test_acc = model.score(X_test, y_test)
     print(f"testing accuracy: {test_acc}")
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--training_data", dest='training_data',type=str)
-    parser.add_argument("--reg_rate", dest='reg_rate',type=float, default=0.01)
+    parser.add_argument("--training_data", dest='training_data', type=str)
+    parser.add_argument("--reg_rate", dest='reg_rate', type=float, default=0.01)
     args = parser.parse_args()
     return args
+
 
 def main(args):
     df = read_data(args.training_data)
