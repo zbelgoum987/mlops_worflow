@@ -25,7 +25,7 @@ jobs:
     - name: install pytest
       run: |
         pip install pytest
-    - name:Run unit tests
+    - name: Run unit tests
       run: | 
         pytest tests/test_train.py
   train:
