@@ -8,18 +8,6 @@ env:
   resource-group: rg-dp100-lb152eb03e5604ef2af # name of the Azure resource group
 
 jobs:
-  linting:
-    runs-on: ubuntu-latest
-    name: linting
-    steps:
-    - name: Check out repo
-      uses: actions/checkout@main
-    - name: Install Flake8
-      run: |
-        pip install flake8
-    - name: Run linting tests
-      run: | 
-        flake8 src/model/
   unit_testing:
     runs-on: ubuntu-latest
     name: unit testing

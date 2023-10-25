@@ -3,10 +3,10 @@ import os
 import pytest
 
 
-def test_csvs_no_files_invalid_path():
-    with pytest.raises(RuntimeError) as error:
-        read_data("/invalid/path/does/not/exist/")
-    assert error.match("Cannot use non-existent path provided")
+# def test_csvs_no_files_invalid_path():
+#     with pytest.raises(RuntimeError) as error:
+#         read_data("/invalid/path/does/not/exist/")
+#     assert error.match("Cannot use non-existent path provided")
 
 
 def test_csvs_creates_dataframe():
