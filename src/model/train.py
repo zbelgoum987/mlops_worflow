@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 import argparse
 import glob
+import mlflow 
 
 def read_data(path):
     csv_files = glob.glob(f"{path}/*.csv") 
@@ -25,9 +26,11 @@ def preprocess_data(df):
 def train_and_test_model(X_train, X_test, y_train, y_test, reg_rate):
     model = LogisticRegression(C=1/reg_rate, random_state=0).fit(X_train, y_train)
     train_acc = model.score(X_train, y_train)
-    print(f"trianing accuracy: {train_acc}")
+    print(f"training accuracy: {train_acc}")
+    mlflow.log_metric("training accuracy", train_acc)
     test_acc = model.score(X_test, y_test)
     print(f"testing accuracy: {test_acc}")
+    mlflow.log_metric("testing accuracy", test_acc)
 
 
 def parse_args():
@@ -39,6 +42,7 @@ def parse_args():
 
 
 def main(args):
+    mlflow.autolog()
     df = read_data(args.training_data)
     X_train, X_test, y_train, y_test = preprocess_data(df)
     train_and_test_model(X_train, X_test, y_train, y_test, args.reg_rate)
