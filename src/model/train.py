@@ -24,6 +24,7 @@ def preprocess_data(df):
 
 
 def train_and_test_model(X_train, X_test, y_train, y_test, reg_rate):
+    mlflow.autolog()
     model = LogisticRegression(C=1/reg_rate, random_state=0).fit(X_train, y_train)
     train_acc = model.score(X_train, y_train)
     print(f"training accuracy: {train_acc}")
@@ -42,7 +43,6 @@ def parse_args():
 
 
 def main(args):
-    mlflow.autolog()
     df = read_data(args.training_data)
     X_train, X_test, y_train, y_test = preprocess_data(df)
     train_and_test_model(X_train, X_test, y_train, y_test, args.reg_rate)
