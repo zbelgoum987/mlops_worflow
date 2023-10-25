@@ -8,6 +8,23 @@ env:
   resource-group: rg-dp100-lb152eb03e5604ef2af # name of the Azure resource group
 
 jobs:
+  unit_testing:
+    runs-on: ubuntu-latest
+    name: unit testing
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: install pytest
+      run: |
+        pip install pytest
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt 
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Run unit tests
+      run: | 
+        pytest tests/test_train.py
   train:
     runs-on: ubuntu-latest
     steps:
